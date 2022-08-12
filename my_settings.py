@@ -24,12 +24,14 @@ DATABASES = {
 
 SECRET_KEY = env('SECRET_KEY')
 
-SOCIALACCOUNT_PROVIDERS = {
+SOCIAL = {
     'kakao': {
-        'APP': {
-            'client_id': env('KAKAO_LOGIN_CLIENT_ID'),
-            'secret': env('KAKAO_LOGIN_CLIENT_ID'),
-            'key': ''
-        }
+        'client_id': env('KAKAO_LOGIN_CLIENT_ID'),
+        'secret': env('KAKAO_LOGIN_CLIENT_ID'),
+        'key': '',
+        'get_token':'https://kauth.kakao.com/oauth/token',
+        'get_profile': 'https://kapi.kakao.com/v2/user/me',
+        'redirect_uri': 'http://localhost:3000/kakao',
+        'grant_type':'authorization_code'
     }
 }

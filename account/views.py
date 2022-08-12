@@ -1,6 +1,7 @@
 from email import header
 from http.client import responses
 from django.shortcuts import render
+from ..config.settings import SOCIAL
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from users.models import User
@@ -31,16 +32,8 @@ Host: kauth.kakao.com
     "scope": "account_email openid",
     "refresh_token_expires_in": 5183999
 }
-
-
 """
 
-
-CLIENT_ID = 'f319f13f72f1e9a8b71e4971aa18d6aa'
-KAKAO_GET_TOKEN_URI = 'https://kauth.kakao.com/oauth/token'
-GRANT_TYPE = 'authorization_code'
-REDIRECT_URI = 'http://localhost:3000/kakao'
-KAKAO_GET_PROFILE_URI = 'https://kapi.kakao.com/v2/user/me'
 @api_view(['GET'])
 def test(request):
     try:
@@ -52,12 +45,12 @@ def test(request):
         headers = {'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'}
 
         data = {
-            'grant_type': GRANT_TYPE,
-            'client_id':CLIENT_ID,
-            'redirect_uri': REDIRECT_URI,
+            'grant_type': SOCIAL.kakao.grant_type,
+            'client_id':SOCIAL.kakao.client_id,
+            'redirect_uri': SOCIAL.kakao.redirect_uri,
             'code': code
         }
-        user_token = requests.post(KAKAO_GET_TOKEN_URI, data=data, headers=headers)
+        user_token = requests.post(SOCIAL.kakao.get_token, data=data, headers=headers)
 
         token_json = user_token.json()
 
@@ -72,7 +65,7 @@ def test(request):
         }
         
         data = { 'property_keys': '["kakao_account.email"]'}
-        user_profile = requests.post(KAKAO_GET_PROFILE_URI, data=data, headers=headers).json()
+        user_profile = requests.post(SOCIAL.kakao.get_profile, data=data, headers=headers).json()
         
         if(not user_profile["kakao_account"] or not user_profile["kakao_account"]["email"]):
             return Response({'error': True, 'message':'이메일 수집에 동의해주세요.'})
@@ -84,8 +77,6 @@ def test(request):
             
         success_response = {'error':False, 'message': '로그인에 성공하셨습니다.', 'email': "test"}
         return Response(success_response)
-
-       
     except Exception as ex:
         print("fail")
         response = { 'error':True, 'message':ex}
