@@ -23,3 +23,13 @@ DATABASES = {
 }
 
 SECRET_KEY = env('SECRET_KEY')
+
+SOCIALACCOUNT_PROVIDERS = {
+    'kakao': {
+        'APP': {
+            'client_id': env('KAKAO_LOGIN_CLIENT_ID'),
+            'secret': env('KAKAO_LOGIN_CLIENT_ID'),
+            'key': ''
+        }
+    }
+}

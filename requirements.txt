@@ -1,1 +1,5 @@
 djangorestframework
+pip install djangorestframework-simplejwt
+pip install dj-rest-auth
+pip install django-allauth
+pip install mysqlclient
