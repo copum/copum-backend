@@ -1,0 +1,24 @@
+"""
+OAuth 2.0 사용: https://developers.google.com/identity/protocols/oauth2/web-server
+참고 사이트: https://hyeo-noo.tistory.com/223?category=973643
+Google API: https://console.cloud.google.com/apis/credentials?authuser=1&project=copum-359506&supportedpurview=project
+프로젝트 이름: COPUM
+프로젝트 ID: copum-35950
+앱 이름: COPUM
+앱 도메인 주소(임시): http://localhost:8000/
+승인된 주소: http://localhost:8000/account/google/login/
+
+
+지원 이메일, 담당자 이메일, 테스트 사용자: scarletkim2121@gmail.com
+
+"""
+
+"""
+정해야 할 것
+
+앱 도메인 주소
+API 및 서비스 - OAuth 동의 화면 - 앱 도메인(승인된 도메인 주소): 나중에 소셜로그인에서 필요한 콜백함수의 엔드포인트 적어주기
+config settings.py - LOGIN_URL과 LOGIN_REDIRECT_URL
+
+--------------------------------------------------나중에 Google.settings 삭제
+"""

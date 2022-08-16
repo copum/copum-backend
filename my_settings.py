@@ -33,5 +33,14 @@ SOCIAL = {
         'get_profile': 'https://kapi.kakao.com/v2/user/me',
         'redirect_uri': 'http://localhost:3000/kakao',
         'grant_type':'authorization_code'
+    }, 
+    'google': {
+        'client_id': env('GOOGLE_LOGIN_CLIENT_ID'),
+        'secret': env('GOOGLE_LOGIN_CLIENT_SECRET'),
+        'key': '',
+        'get_token':"https://oauth2.googleapis.com/token",
+        'get_profile':"https://www.googleapis.com/oauth2/v3/userinfo",
+        'redirect_uri': 'http://localhost:3000/google/',
+        'grant_type':'authorization_code'
     }
 }

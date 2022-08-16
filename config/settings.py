@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'account',
-    'rest_framework'
+    'rest_framework',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,19 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'auth.authenticate.SafeJWTAuthentication',
+    ),
+}
+
 ROOT_URLCONF = 'config.urls'
+
+LOGIN_URL = '/auth/login/google-oauth2/'
+# LOGIN_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {
@@ -105,6 +118,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
