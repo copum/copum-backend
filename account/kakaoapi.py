@@ -35,7 +35,7 @@ Host: kauth.kakao.com
 """
 
 @api_view(['GET'])
-def kakao(request):
+def kakao_login(request):
     try:
         if(not request.GET["code"]):
             return Response({'error': True, 'message':'code를 찾을 수 없습니다.'})
