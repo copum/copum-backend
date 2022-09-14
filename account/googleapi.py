@@ -1,11 +1,8 @@
+from tkinter import EW
 from apiclient import discovery
 import httplib2
-from oauth2client import client
-from ..config.settings import SOCIAL
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from users.models import User
-
 
 # (Receive auth_code by HTTPS POST)
 auth_code = ''
@@ -46,9 +43,9 @@ def google_login(request):
 
         # Exchange auth code for access token, refresh token, and ID token
         credentials = client.credentials_from_clientsecrets_and_code(
-        CLIENT_SECRET_FILE,
-        ['https://www.googleapis.com/auth/drive.appdata', 'profile', 'email'],
-        auth_code)
+    CLIENT_SECRET_FILE,
+    ['https://www.googleapis.com/auth/drive.appdata', 'profile', 'email'],
+    auth_code)
 
         # Call Google API
         http_auth = credentials.authorize(httplib2.Http())
@@ -56,15 +53,8 @@ def google_login(request):
         appfolder = drive_service.files().get(fileId='appfolder').execute()
 
         # Get profile info from ID token
-        user_id = credentials.id_token['sub']
-        user_email = credentials.id_token['email']
-        
-        findUser = User.objects.get(email=user_email)
-        if(not findUser):
-            return Response({'error':True, 'message': '존재하지 않는 아이디입니다. 회원가입하고 다시 시도해주세요.'})
-            
-        success_response = {'error':False, 'message': '로그인에 성공하셨습니다.', 'email': "test"}
-        return Response(success_response)
+        userid = credentials.id_token['sub']
+        email = credentials.id_token['email']
         
     except Exception as ex:
         print("fail")

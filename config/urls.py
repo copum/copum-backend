@@ -21,4 +21,5 @@ urlpatterns = [
     path('account/',include('account.urls')),
     path('user/',include('users.urls')),
     path('post/',include('Post.urls')),
+    path('category/',include('Category.urls')),
 ]
