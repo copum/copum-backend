@@ -1,9 +1,12 @@
-pip install djangorestframework
-pip install djangorestframework-simplejwt
-pip install django-environ
-pip install django-rest-auth
-pip install django-allauth
-pip install mysqlclient
-pip install social-auth-app-django
-pip install --upgrade google-api-python-client
-pip install --upgrade google-auth google-auth-oauthlib google-auth-httplib2
+djangorestframework
+djangorestframework-simplejwt
+django-environ
+django-rest-auth
+django-allauth
+mysqlclient
+social-auth-app-django
+google-api-python-client
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+p
