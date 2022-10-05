@@ -64,6 +64,12 @@ class Question(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 날짜')
     updated_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 수정 날짜')
 
+    def __str__(self):
+        return self.Question_title
+
+    class Meta :
+        db_table = 'Questions'
+
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -73,3 +79,6 @@ class Answer(models.Model):
     image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, verbose_name='답변 사진', blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='답변 날짜')
     updated_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 수정 날짜')
+
+    class Meta :
+        db_table = 'Answers'
