@@ -51,18 +51,19 @@ class CategoryType(models.TextChoices):
     etc = 'etc', _('etc')
 
 
-class Question(models.Model):
-    title = models.CharField(max_length=100, verbose_name='질문 제목', null=False, blank=False)
-    category = models.CharField(
+class Question(models.Model) :
+    Question_id = models.AutoField(primary_key = True, null = False, blank=False)
+    Question_title = models.CharField(max_length=100, verbose_name='질문 제목', null=False)
+    Question_category = models.CharField(
         choices=CategoryType.choices,
         max_length=20,
-        default=CategoryType.etc
+        default = CategoryType.etc,
     )
-    content = models.TextField(verbose_name='질문 내용', null=False, Blank=False)
-    codes = models.TextField(verbose_name='질문 코드', null=True, Blank=True)
-    image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True, verbose_name='질문 사진')
-    created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 날짜')
-    updated_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 수정 날짜')
+    Question_content = models.TextField(verbose_name='질문 내용', null=False)
+    Question_codes = models.TextField(verbose_name='질문 코드', null=True, blank=True)
+    Question_image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True, verbose_name='질문 사진')
+    Question_created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 날짜')
+    Question_updated_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 수정 날짜')
 
     def __str__(self):
         return self.Question_title
