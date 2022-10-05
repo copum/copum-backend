@@ -4,6 +4,10 @@ from rest_framework.parsers import JSONParser
 from .models import Posts
 from .serializers import PostSerializer
 
+from rest_framework import generics
+from .models import Question, Answer
+from .serializers import QuestionListSerializer, QuestionCreateSerializer, QuestionSerializer
+
 
 @csrf_exempt
 def question_post(request):
@@ -42,3 +46,20 @@ def question_post_detail(request,pk):
     elif request.method == 'DELETE':
         obj.delete()
         return HttpResponse(status=204)
+
+# -------------------------------------------------------------
+# 은배 코드 추가
+
+class QuestionList(generics.ListAPIView) :
+    queryset = Question.objects.all()
+    serializer_class = QuestionListSerializer
+
+
+class QuestionCreate(generics.CreateAPIView) :
+    queryset = Question.objects.all()
+    serializer_class = QuestionCreateSerializer
+
+
+class QuestionMotion(generics.RetrieveUpdateDestroyAPIView) :
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer

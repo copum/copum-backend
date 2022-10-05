@@ -71,14 +71,17 @@ class Question(models.Model):
         db_table = 'Questions'
 
 
-class Answer(models.Model):
+class Answer(models.Model) :
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100, verbose_name='답변 제목', blank=False, null=False)
-    content = models.TextField(verbose_name='답변 내용', null=False, blank=False)
-    codes = models.TextField(verbose_name='답변 코드', null=True, blank=False)
-    image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, verbose_name='답변 사진', blank=True)
-    created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='답변 날짜')
-    updated_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 수정 날짜')
+    Answer_title = models.CharField(max_length=100, verbose_name='답변 제목', null=False)
+    Answer_content = models.TextField(verbose_name='답변 내용', null=False)
+    Answer_codes = models.TextField(verbose_name='답변 코드', null=True, blank=True)
+    Answer_image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True, verbose_name='답변 사진')
+    Answer_created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='답변 날짜')
+    Answer_updated_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='답변 수정 날짜')
+
+    def __str__(self):
+        return self.Answer_title
 
     class Meta :
         db_table = 'Answers'
