@@ -48,18 +48,3 @@ def question_post_detail(request,pk):
         return HttpResponse(status=204)
 
 # -------------------------------------------------------------
-# 은배 코드 추가
-
-class QuestionList(generics.ListAPIView) :
-    queryset = Question.objects.all()
-    serializer_class = QuestionListSerializer
-
-
-class QuestionCreate(generics.CreateAPIView) :
-    queryset = Question.objects.all()
-    serializer_class = QuestionCreateSerializer
-
-
-class QuestionMotion(generics.RetrieveUpdateDestroyAPIView) :
-    queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
