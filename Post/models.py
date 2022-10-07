@@ -64,7 +64,6 @@ class Question(models.Model) :
     Question_codes = models.TextField(verbose_name='질문 코드', null=True, blank=True)
     Question_image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True, verbose_name='질문 사진')
     Question_created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 날짜')
-    Question_updated_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 수정 날짜')
 
     def __str__(self):
         return self.Question_title
@@ -75,13 +74,14 @@ class Question(models.Model) :
 
 class Answer(models.Model) :
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='writer', null=True)  # 작성자 id
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, related_name='answers' ,on_delete=models.CASCADE)
+    Answer_id = models.AutoField(primary_key=True, null=False, blank=False)
     Answer_title = models.CharField(max_length=100, verbose_name='답변 제목', null=False)
     Answer_content = models.TextField(verbose_name='답변 내용', null=False)
     Answer_codes = models.TextField(verbose_name='답변 코드', null=True, blank=True)
     Answer_image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True, verbose_name='답변 사진')
     Answer_created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='답변 날짜')
-    Answer_updated_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='답변 수정 날짜')
+
 
     def __str__(self):
         return self.Answer_title
