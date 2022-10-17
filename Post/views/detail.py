@@ -24,3 +24,26 @@ class QuestionDetail(APIView) :
         question = get_object_or_404(Question, Question_id = pk)
         question.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class AnswerPutDeleteAPIView(APIView) :
+    def get(self, request, answer_pk):
+        answer = get_object_or_404(Answer, pk = answer_pk)
+        serializer = AnswerSerializer(answer)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, answer_pk):
+        answer = get_object_or_404(Answer, pk = answer_pk)
+        serializer = AnswerSerializer(answer, data = request.data)
+        if serializer.is_valid()
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, answer_pk):
+        answer = get_object_or_404(Answer, pk = answer_pk)
+        answer.delete()
+        messages = {
+            'Delete' : f"{answer_pk}번 글이 삭제되었습니다."
+        }
+        return Response(messages, status=status.HTTP_204_NO_CONTENT)
