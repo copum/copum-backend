@@ -9,12 +9,14 @@ urlpatterns = [
     path('user/',include('users.urls')),
 
     #question 조회 url
-    path('question/', QuestionList.as_view(), name='question-list'),
-    path('question/<int:question_pk>/', QuestionDetail.as_view(), name='question-detail'),
+    path('question/<int:question_pk>/', QuestionDetail.as_view(), name='question-detail'), #특정 질문 조회하기
+
+    # answer 조회 및 작성
     path('answer/', AnswerAPIView.as_view(), name='answer-list'),
     path('answer/<int:answer_pk>/', AnswerPutDeleteAPIView.as_view(), name='answer-detail'),
 
     # 언어 조회
+    path('question/', QuestionList.as_view(), name='question-list'), # 모든 질문 조회
     path('python/question/', PythonList.as_view(), name='question-python'),  # python 질문 조회
     path('java/question/', JavaList.as_view(), name='question-java'),  # java 질문 조회
     path('javascript/question/', JavaScriptList.as_view(), name='question-javascript'),
