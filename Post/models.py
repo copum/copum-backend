@@ -53,6 +53,7 @@ class Question(models.Model) :
     Question_content = models.TextField(verbose_name='질문 내용', null=False)
     Question_codes = models.TextField(verbose_name='질문 코드', null=True, blank=True)
     Question_image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True, verbose_name='질문 사진')
+    Question_counting = models.IntegerField(default=0, verbose_name='질문 조회수')
     Question_created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 날짜')
 
     def __str__(self):
