@@ -12,7 +12,7 @@ urlpatterns = [
     path('question/<int:question_pk>/', QuestionDetail.as_view(), name='question-detail'), #특정 질문 조회하기
 
     # answer 조회 및 작성
-    path('answer/', AnswerAPIView.as_view(), name='answer-list'),
+    path('answer/', AnswerList.as_view(), name='answer-list'),
     path('answer/<int:answer_pk>/', AnswerPutDeleteAPIView.as_view(), name='answer-detail'),
 
     # 언어 조회
