@@ -25,7 +25,6 @@ class QuestionDetail(APIView) :
         question.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 class AnswerPutDeleteAPIView(APIView) :
     def get(self, request, answer_pk):
         answer = get_object_or_404(Answer, pk = answer_pk)

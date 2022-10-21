@@ -21,4 +21,4 @@ API 및 서비스 - OAuth 동의 화면 - 앱 도메인(승인된 도메인 주�
 config settings.py - LOGIN_URL과 LOGIN_REDIRECT_URL
 
 --------------------------------------------------나중에 Google.settings 삭제
-"""
+123456
