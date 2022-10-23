@@ -19,6 +19,9 @@ urlpatterns = [
     path('answer/', AnswerList.as_view(), name='answer-list'),
     path('answer/<int:answer_pk>/', AnswerPutDeleteAPIView.as_view(), name='answer-detail'),
 
+    # category 조회
+    path('category/', Categoriry.as_view(), name='category-list'),
+
     # 언어별  조회
     # 전체 질문 조회 및 질문 만들기
     path('question/', QuestionList.as_view(), name='question-list'),

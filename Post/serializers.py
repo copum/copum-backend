@@ -1,6 +1,12 @@
 from rest_framework import serializers
 
-from .models import Question, Answer
+from .models import Question, Answer, Category
+
+
+class CategorySerializer(serializers.ModelSerializer) :
+    class Meta :
+        model = Category
+        fields = ('category_name')
 
 
 class AnswerSerializer(serializers.ModelSerializer) :
