@@ -12,8 +12,10 @@ class QuestionDetail(APIView) :
     def get(self, request, question_pk):
         question = get_object_or_404(Question, pk=question_pk)
         serializer = QuestionDetailSerializer(question)
+        # 글쓴이 경우 count 제외
         if request.user:
             question.Question_counting += 0
+        # 글쓴이를 제외한 사람은 count
         else:
             question.Question_counting += 1
         question.save()
