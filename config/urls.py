@@ -20,7 +20,7 @@ urlpatterns = [
     path('answer/<int:answer_pk>/', AnswerPutDeleteAPIView.as_view(), name='answer-detail'),
 
     # category 조회
-    path('category/', Categoriry.as_view(), name='category-list'),
+    path('category/', CategoryList.as_view(), name='category-list'),
 
     # 언어별  조회
     # 전체 질문 조회 및 질문 만들기
