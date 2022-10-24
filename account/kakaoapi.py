@@ -73,7 +73,7 @@ def kakao_login(request):
 
         user_email = user_profile["kakao_account"]["email"]
         findUser = User.objects.get(email=user_email)
-        if(not findUser):
+        if not findUser :
             return Response({'error':True, 'message': '존재하지 않는 아이디입니다. 회원가입하고 다시 시도해주세요.', 'status':401})
             
         success_response = {'error':False, 'message': '로그인에 성공하셨습니다.', 'email': "test", 'status':200}
