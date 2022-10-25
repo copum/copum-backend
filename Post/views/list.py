@@ -18,7 +18,7 @@ class QuestionList(APIView) :
                 parse.unquote(request.GET.get(key))
 
         # 검색할 내용이 title, body 다 없을 경우, 모든 질문 조회
-        if (question_search == ''):
+        if question_search == '' :
             questions = Question.objects.order_by('-Question_created_at')
 
         # 검색할 내용이 title, body 해당하는 질문에 있는 경우
