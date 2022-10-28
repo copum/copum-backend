@@ -58,3 +58,22 @@ class AnswerPutDeleteAPIView(APIView) :
             'Delete' : f"{answer_pk}번 글이 삭제되었습니다."
         }
         return Response(messages, status=status.HTTP_204_NO_CONTENT)
+
+
+# class Question_Empathy(APIView) :
+#     def get(self, request, question_pk):
+#         question = get_object_or_404(Question, pk=question_pk)
+#         # 공감 안에 요청을 보낼 유저가 있을 경우
+#         if request.user in question.Question_.all() :
+#             # QUESTION MODEL Empathy 추가한 후 로직
+#             question.empathy.remove(request.user)
+#             messages = {
+#                 'Delete' : '공감 취소'
+#             }
+#         # 공감 안에 요청을 보낼 유저가 없을 경우
+#         else :
+#             question.empathy.add(request.user)
+#             messages = {
+#                 'Add' : '공감'
+#             }
+#         return Response(messages, status=status.HTTP_200_OK)

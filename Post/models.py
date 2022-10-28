@@ -29,6 +29,7 @@ class Question(models.Model) :
     Question_image = models.ImageField(upload_to=question_image_rename, null=True, blank=True, verbose_name='질문 사진')
     Question_created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 날짜')
     Question_counting = models.IntegerField(default=0, verbose_name='질문 조회수')
+    # Question_Empathy = models.ManyToManyField(User)
 
     def __str__(self):
         return self.Question_title

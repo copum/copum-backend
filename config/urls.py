@@ -11,6 +11,9 @@ urlpatterns = [
     path('account/',include('account.urls')),
     path('user/',include('users.urls')),
 
+    # 전체 질문 조회 및 질문 만들기
+    path('question/', QuestionList.as_view(), name='question-list'),
+
     # 특정 question 조회 url
     # Ex) 1번 질문 조회 : question/1/
     path('question/<int:question_pk>/', QuestionDetail.as_view(), name='question-detail'), #특정 질문 조회하기
@@ -22,9 +25,10 @@ urlpatterns = [
     # category 조회
     path('category/', CategoryList.as_view(), name='category-list'),
 
+    # 공감 조회
+    # path('empathy/<int:question_id>/', Question_Empathy.as_view(), name='question-empathy'),
+
     # 언어별  조회
-    # 전체 질문 조회 및 질문 만들기
-    path('question/', QuestionList.as_view(), name='question-list'),
     # python 질문 조회
     path('python/question/', PythonList.as_view(), name='question-python'),
     # java 질문 조회
