@@ -41,7 +41,8 @@ SOCIAL = {
     #     'key': '',
     #     "auth_uri":"https://accounts.google.com/o/oauth2/auth",
     #     'get_token':"https://oauth2.googleapis.com/token",
-    #     'get_profile':"https://www.googleapis.com/oauth2/v3/userinfo",
+    #     'get_profi
+    # le':"https://www.googleapis.com/oauth2/v3/userinfo",
     #     'grant_type':'authorization_code'
     # }
 }
