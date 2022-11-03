@@ -7,7 +7,6 @@ from rest_framework.views import APIView
 from ..models import *
 from ..serializers import *
 
-
 class QuestionList(APIView) :
     def get(self, request):
         question_search = request.GET.get('search', '')
@@ -33,6 +32,7 @@ class QuestionList(APIView) :
 
     def post(self, request):
         serializer = QuestionSerializer(data=request.data)
+        print(request.data)
         if serializer.is_valid() :
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -94,7 +94,6 @@ class JavaScriptList(APIView) :
                 .order_by('-Question_created_at')
         serializer = QuestionSerializer(javascript_list, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 class CList(APIView) :
     def get(self, request):

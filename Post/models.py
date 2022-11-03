@@ -1,6 +1,5 @@
 from django.db import models
-
-
+from users.models import User
 class Category(models.Model) :
     category_name = models.CharField(max_length=20, verbose_name='카테고리 명')
 
@@ -17,6 +16,7 @@ def question_image_rename(instance, filename):
 
 
 class Question(models.Model) :
+    Author = models.ForeignKey(User, on_delete = models.CASCADE, null=False)
     Question_title = models.CharField(max_length=100, verbose_name='질문 제목', null=False)
     Question_category1 = models.ForeignKey(Category, related_name='카테고리1', on_delete=models.CASCADE)
     Question_category2 = models.ForeignKey(Category, related_name='카테고리2', blank=True, null=True,
@@ -28,8 +28,7 @@ class Question(models.Model) :
     Question_content = models.TextField(verbose_name='질문 내용', null=False)
     Question_image = models.ImageField(upload_to=question_image_rename, null=True, blank=True, verbose_name='질문 사진')
     Question_created_at = models.DateTimeField(auto_now_add=True, null=False, verbose_name='질문 날짜')
-    Question_counting = models.IntegerField(default=0, verbose_name='질문 조회수')
-    # Question_Empathy = models.ManyToManyField(User)
+    Question_counting = models.IntegerField(default=0, verbose_name='질문 조회수', null=True)
 
     def __str__(self):
         return self.Question_title
