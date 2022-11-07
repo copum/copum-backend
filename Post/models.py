@@ -46,6 +46,7 @@ def answer_image_rename(instance, filename):
 
 
 class Answer(models.Model) :
+    Respondent = models.Foreignkey(User, related_name='respondent', on_delete = models.Cascade)
     question = models.ForeignKey(Question, related_name='answers' ,on_delete=models.CASCADE)
     Answer_title = models.CharField(max_length=100, verbose_name='답변 제목', null=False)
     Answer_content = models.TextField(verbose_name='답변 내용', null=False)
