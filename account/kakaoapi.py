@@ -51,7 +51,7 @@ def kakao_login(request):
         #findUser = User.objects.get(email=user_email)
         #if not findUser :
         #    return Response({'error':True, 'message': '존재하지 않는 아이디입니다. 회원가입하고 다시 시도해주세요.', 'status':401})
-            
+        ##주석
         success_response = {'error':False, 'message': '로그인에 성공하셨습니다.', 'email': "test", 'status':200}
         return Response(success_response)
     except Exception as ex:
