@@ -54,6 +54,9 @@ def kakao_login(request):
 
         # if(not token_json["access_token"]):
         #     return Response({'error': True, 'message':'access_token not found'})
+
+        data = {'property_keys': '["kakao_account.email"]'}
+        user_profile = requests.post(SOCIAL.kakao.get_profile, data=data, headers=headers).json()
         
         if(not request.GET["access_token"]):
             return Response({'error': True, 'message':'access_token not found'})
@@ -64,9 +67,7 @@ def kakao_login(request):
             'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
             'Authorization': f"Bearer {access_token}"
         }
-        
-        data = { 'property_keys': '["kakao_account.email"]'}
-        user_profile = requests.post(SOCIAL.kakao.get_profile, data=data, headers=headers).json()
+
         
         # if(not user_profile["kakao_account"] or not user_profile["kakao_account"]["email"]):
         #     return Response({'error': True, 'message':'이메일 수집에 동의해주세요.'})

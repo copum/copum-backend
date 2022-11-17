@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.model import User
+
 
 class Category(models.Model) :
     category_name = models.CharField(max_length=20, verbose_name='카테고리 명')
