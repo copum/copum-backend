@@ -20,8 +20,13 @@ class QuestionSerializer(serializers.ModelSerializer) :
 
     class Meta :
         model = Question
+<<<<<<< HEAD
         fields = ('pk', 'Question_category1', 'Question_category2', 'Question_category3', 'Question_category4', \
                   'Question_title', 'Question_content', 'Question_image','Question_counting', 'answers_count')
+=======
+        fields = ('Question_category1', 'Question_category2', 'Question_category3', 'Question_category4', \
+                  'Question_title', 'Question_content', 'Question_image','Question_counting', 'answers_count','Author')
+>>>>>>> b7bb4a482cbf78b02a3b92575ff666584f023cb6
 
 
 class QuestionDetailSerializer(serializers.ModelSerializer) :
