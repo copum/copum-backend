@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import getUserInfo
 
 urlpatterns = [
     path('', views.getData),
-    path('kakao/login/callback/')
+    path('kakao/login/callback/', getUserInfo),
 ]

@@ -31,7 +31,7 @@ SOCIAL = {
         'key': '',
         'get_token':'https://kauth.kakao.com/oauth/token',
         'get_profile': 'https://kapi.kakao.com/v2/user/me',
-        'redirect_uri': 'http://localhost:3000/kakao',
+        'redirect_uri': 'http://localhost:3000',
         'grant_type':'authorization_code'
     }, 
     # 'google': {

@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from users.models import User
 import requests
+import json
+
+
 # Create your views here.
 
 """
@@ -58,24 +61,30 @@ def kakao_login(request):
         data = {'property_keys': '["kakao_account.email"]'}
         user_profile = requests.post(SOCIAL.kakao.get_profile, data=data, headers=headers).json()
         
-        if(not request.GET["access_token"]):
+        if not request.GET["access_token"]:
             return Response({'error': True, 'message':'access_token not found'})
-        
-        access_token = request.GET["access_token"]
 
+        kakao = SOCIAL.get('kakao')
+
+        access_token = request.GET["access_token"]
         headers = {
-            'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-            'Authorization': f"Bearer {access_token}"
+            'Authorization': "Bearer %s" % access_token
         }
+
 
         
         # if(not user_profile["kakao_account"] or not user_profile["kakao_account"]["email"]):
         #     return Response({'error': True, 'message':'이메일 수집에 동의해주세요.'})
 
-        user_email = user_profile["kakao_account"]["email"]
-        findUser = User.objects.get(email=user_email)
-        if not findUser :
-            return Response({'error':True, 'message': '존재하지 않는 아이디입니다. 회원가입하고 다시 시도해주세요.', 'status':401})
+        user_profile = requests.get(kakao.get('get_profile'),headers=headers).json()
+        print(user_profile)
+        #if(not user_profile["kakao_account"] or not user_profile["kakao_account"]["email"]):
+        #    return Response({'error': True, 'message':'이메일 수집에 동의해주세요.'})
+
+        #user_email = user_profile["kakao_account"]["email"]
+        #findUser = User.objects.get(email=user_email)
+        #if not findUser :
+        #    return Response({'error':True, 'message': '존재하지 않는 아이디입니다. 회원가입하고 다시 시도해주세요.', 'status':401})
             
         success_response = {'error':False, 'message': '로그인에 성공하셨습니다.', 'email': "test", 'status':200}
         return Response(success_response)
