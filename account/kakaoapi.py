@@ -22,7 +22,7 @@ class kakao_login(APIView) :
             # 닉네임과 이메일 데이터를 가져온다.
             nickname = user_profile['kakao_account']['profile']['nickname']
             email = user_profile['kakao_account']['email']
-            #profile_image = user_profile["kakao_account"]['profile']['profile_image_url']
+            profile_image = user_profile["kakao_account"]['profile']['profile_image_url']
             
             # # 데이터 베이스에 이미 저장되어있는 회원이면, user에 회원 저장하기
             if User.objects.filter(email=email).exists() :
@@ -31,10 +31,10 @@ class kakao_login(APIView) :
             # # 회원 가입일 경우
             else :
                 user = User.objects.create(
+                    LOGIN_TYPE = 'kakao',
                     email=email,
                     user_id=nickname,
-                    #profile_image=profile_image,
-                    #login type 추가 
+                    profile_image=profile_image,
                 )
 
             user.save()
