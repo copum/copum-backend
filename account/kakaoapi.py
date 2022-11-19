@@ -35,7 +35,9 @@ class kakao_login(APIView) :
                     nickname=nickname,
                     profile_image=profile_image
                 )
-                user.save()
+
+            user.save()
+
             success_response = {
                 'error' : False,
                 'message' : '로그인 성공',
