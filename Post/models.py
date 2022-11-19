@@ -1,12 +1,6 @@
 from django.db import models
-<<<<<<< HEAD
-
-from users.model import User
-
-
-=======
 from users.models import User
->>>>>>> b7bb4a482cbf78b02a3b92575ff666584f023cb6
+
 class Category(models.Model) :
     category_name = models.CharField(max_length=20, verbose_name='카테고리 명')
 

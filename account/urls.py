@@ -1,9 +1,8 @@
-
-from django.urls import path, include
-from . import kakaoapi, googleapi
+from django.urls import path
+from kakaoapi import kakao_login
 
 
 urlpatterns = [
-    path('kakao/login', kakaoapi.kakao_login),
-    path('google/login', googleapi.google_login),
+    path('kakao/login', kakao_login.as_view()),
+    # path('google/login', googleapi.google_login),
 ]
