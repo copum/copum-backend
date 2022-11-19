@@ -1,3 +1,4 @@
+import datetime
 from pathlib import Path
 from .my_settings import DATABASES, SECRET_KEY, SOCIAL
 import pymysql
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     # CORS 설정
     # 'corsheaders',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,12 +93,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': BASE_DIR / 'db.sqlite3',
 #    }
-#}
+# }
 DATABASES = DATABASES
 
 
@@ -155,3 +157,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 SOCIAL = SOCIAL
+
