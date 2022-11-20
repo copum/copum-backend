@@ -40,7 +40,7 @@ class kakao_login(APIView) :
             # # 회원 가입일 경우
             else :
                 user = User.objects.create(
-                    LOGIN_TYPE = 'KAKAO',
+                    login_type = 'kakao',
                     email=email,
                     user_id=nickname,
                     profile_image=profile_image,
