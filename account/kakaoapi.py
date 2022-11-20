@@ -27,6 +27,15 @@ class kakao_login(APIView) :
             # # 데이터 베이스에 이미 저장되어있는 회원이면, user에 회원 저장하기
             if User.objects.filter(email=email).exists() :
                 user = User.objects.get(email=email)
+                user.save()
+                success_response = {
+                    'error' : False,
+                    'message' : '로그인 성공',
+                    'email' : email,
+                    'status' : 200
+                }
+                return Response(success_response)
+
 
             # # 회원 가입일 경우
             else :
@@ -36,22 +45,20 @@ class kakao_login(APIView) :
                     user_id=nickname,
                     profile_image=profile_image,
                 )
-
-            user.save()
-
-            success_response = {
-                'error' : False,
-                'message' : '로그인 성공',
-                'email' : 'test',
-                'status' : 200
-            }
-            return Response(success_response)
+                user.save()
+                success_response = {
+                    'error' : False,
+                    'message' : '회원가입 성공',
+                    'email' : email,
+                    'status' : 201
+                }
+                return Response(success_response)
 
         except Exception as ex :
             print('fail')
             response = {
                 'error' : True,
-                'message' : ex,
+                'message' : '로그인 실패',
                 'status' : 400
             }
             return Response(response)
