@@ -2,6 +2,7 @@ import requests
 import json
 
 from config.settings import SOCIAL
+from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -27,15 +28,8 @@ class kakao_login(APIView) :
             # # 데이터 베이스에 이미 저장되어있는 회원이면, user에 회원 저장하기
             if User.objects.filter(email=email).exists() :
                 user = User.objects.get(email=email)
-                user.save()
-                success_response = {
-                    'error' : False,
-                    'message' : '로그인 성공',
-                    'email' : email,
-                    'status' : 200
-                }
-                return Response(success_response)
-
+                access_token = access_token
+                return JsonResponse({'message' : "로그인 성공", "token" : access_token, 'error' : False}, status=200)
 
             # # 회원 가입일 경우
             else :
@@ -46,19 +40,13 @@ class kakao_login(APIView) :
                     profile_image=profile_image,
                 )
                 user.save()
-                success_response = {
-                    'error' : False,
-                    'message' : '회원가입 성공',
-                    'email' : email,
-                    'status' : 201
-                }
-                return Response(success_response)
+                access_token = access_token
+                return JsonResponse({'message': "회원가입 성공", "token": access_token, 'error': False}, status=200)
+
 
         except Exception as ex :
             print('fail')
             response = {
                 'error' : True,
-                'message' : '로그인 실패',
-                'status' : 400
             }
-            return Response(response)
+            return Response(response, status=400)
