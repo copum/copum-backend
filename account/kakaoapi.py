@@ -19,7 +19,7 @@ class kakao_login(APIView) :
                 'Authorization' : "Bearer %s" % access_token
             }
             user_profile = requests.get(kakao.get('get_profile'), headers=headers).json()
-
+            print(user_profile)
             # 닉네임과 이메일 데이터를 가져온다.
             nickname = user_profile['kakao_account']['profile']['nickname']
             email = user_profile['kakao_account']['email']
