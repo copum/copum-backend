@@ -7,11 +7,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from users.models import User
+from users.serializers import UserSerializer
 
 
 class kakao_login(APIView) :
     def get(self, request):
-       
         try :
             kakao = SOCIAL.get('kakao')
             access_token = request.GET['access_token']
@@ -19,7 +19,6 @@ class kakao_login(APIView) :
                 'Authorization' : "Bearer %s" % access_token
             }
             user_profile = requests.get(kakao.get('get_profile'), headers=headers).json()
-            print(user_profile)
             # 닉네임과 이메일 데이터를 가져온다.
             nickname = user_profile['kakao_account']['profile']['nickname']
             email = user_profile['kakao_account']['email']
@@ -29,10 +28,12 @@ class kakao_login(APIView) :
             if User.objects.filter(email=email).exists() :
                 user = User.objects.get(email=email)
                 access_token = access_token
-                return JsonResponse({'message' : "로그인 성공", "token" : access_token, 'error' : False}, status=200)
+                return JsonResponse({'message' : "로그인 성공", "token" : access_token, 'error' : False, "user" :{"id": user.id, "user_id": user.user_id, "email": user.email, 'login_type': user.login_type}}, status=200)
 
             # # 회원 가입일 경우
             else :
+                print("tset1")
+
                 user = User.objects.create(
                     login_type = 'kakao',
                     email=email,
@@ -41,8 +42,7 @@ class kakao_login(APIView) :
                 )
                 user.save()
                 access_token = access_token
-                return JsonResponse({'message': "회원가입 성공", "token": access_token, 'error': False}, status=200)
-
+                return JsonResponse({'message': "회원가입 성공", "token": access_token, 'error': False, "user" :{"id": user.id, "user_id": user.user_id, "email": user.email, 'login_type': user.login_type}}, status=200)
 
         except Exception as ex :
             print('fail')

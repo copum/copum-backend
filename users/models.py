@@ -10,4 +10,8 @@ class User(models.Model):
 
     class Meta:
         db_table = 'users'
+    
+    def __str__(self):
+        list = [self.id , self.user_id, self.profile_image, self.email, self.password, self.login_type]
+        return ','.join(list)
 
