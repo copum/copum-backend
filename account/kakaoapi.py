@@ -11,7 +11,6 @@ from users.models import User
 
 class kakao_login(APIView) :
     def get(self, request):
-       
         try :
             kakao = SOCIAL.get('kakao')
             access_token = request.GET['access_token']
@@ -42,7 +41,6 @@ class kakao_login(APIView) :
                 user.save()
                 access_token = access_token
                 return JsonResponse({'message': "회원가입 성공", "token": access_token, 'error': False}, status=200)
-
 
         except Exception as ex :
             print('fail')

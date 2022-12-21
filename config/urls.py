@@ -3,15 +3,32 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from rest_framework import routers
+
 from Post.views.list import *
 from Post.views.detail import *
+
+from user.views import RegisterAPIView, UserViewSet, AuthAPIView
+from rest_framework_simplejwt.views import TokenRefreshView
+
+router = routers.DefaultRouter()
+router.register('list', UserViewSet) # 유저리스트 (테스트용)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/',include('account.urls')),
     path('user/',include('users.urls')),
 
-    # 전체 질문 조회 및 질문 만들기
+    path("", include(router.urls)),
+
+    path('register/', RegisterAPIView.as_view()),  # post - 회원가입
+
+    path("auth/", AuthAPIView.as_view()),
+
+    path('auth/refresh/', TokenRefreshView.as_view()),  # jwt 토큰 재발급
+
+                  # 전체 질문 조회 및 질문 만들기
     path('question/', QuestionList.as_view(), name='question-list'),
 
     # 특정 question 조회 url
