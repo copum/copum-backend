@@ -32,6 +32,7 @@ class RegisterAPIView(APIView):
                         "refresh": refresh_token,
                     },
                 },
+                login_type='jwt',
                 status=status.HTTP_200_OK,
             )
 

@@ -42,11 +42,7 @@ class kakao_login(APIView) :
                 )
                 user.save()
                 access_token = access_token
-<<<<<<< HEAD
-                return JsonResponse({'message': "회원가입 성공", "token": access_token, 'error': False}, status=200)
-=======
                 return JsonResponse({'message': "회원가입 성공", "token": access_token, 'error': False, "user" :{"id": user.id, "user_id": user.user_id, "email": user.email, 'login_type': user.login_type}}, status=200)
->>>>>>> 43f0eb9d7ab8e84a1467aeb6d01fc745c6d1bba7
 
         except Exception as ex :
             print('fail')
