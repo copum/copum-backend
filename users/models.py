@@ -36,8 +36,10 @@ class UserManager(BaseUserManager):
 
 
 # AbstractBaseUser를 상속해서 유저 커스텀
-class TokenUser(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=30, unique=True, null=False, blank=False)
+    profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True, verbose_name='프로필 사진')
+    password = models.CharField(max_length=255, null=True)
     login_type = models.CharField(default='', null=True, max_length=10)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -51,13 +53,16 @@ class TokenUser(AbstractBaseUser, PermissionsMixin):
     # 사용자의 username field는 email으로 설정 (이메일로 로그인)
     USERNAME_FIELD = 'email'
 
-class User(models.Model):
-    user_id = models.CharField(max_length=100)
-    profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True, verbose_name='프로필 사진')
-    email = models.CharField(max_length=200)
-    password = models.CharField(max_length=255, null=True)
-    login_type= models.CharField(default='', null=True, max_length=10)
-
     class Meta:
         db_table = 'users'
+
+# class User(models.Model):
+#     user_id = models.CharField(max_length=100)
+#     profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True, verbose_name='프로필 사진')
+#     email = models.CharField(max_length=200)
+#     password = models.CharField(max_length=255, null=True)
+#     login_type= models.CharField(default='', null=True, max_length=10)
+#
+#     class Meta:
+#         db_table = 'users'
 
