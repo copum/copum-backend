@@ -2,9 +2,12 @@ import requests
 import json
 
 from config.settings import SOCIAL
+from django.db.migrations import serializer
 from django.http import JsonResponse
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from users.models import User
 from users.serializers import UserSerializer
@@ -40,6 +43,29 @@ class kakao_login(APIView) :
                     user_id=nickname,
                     profile_image=profile_image,
                 )
+
+                # jwt 토큰 접근
+                token = TokenObtainPairSerializer.get_token(user)
+                refresh_token = str(token)
+                access_token = str(token.access_token)
+                res = Response(
+                    {
+                        "user": serializer.data,
+                        "message": "register successs",
+                        "token": {
+                            "access": access_token,
+                            "refresh": refresh_token,
+                        },
+                    },
+                    login_type='jwt',
+                    status=status.HTTP_200_OK,
+                )
+
+                # jwt 토큰 => 쿠키에 저장
+                res.set_cookie("access", access_token, httponly=True)
+                res.set_cookie("refresh", refresh_token, httponly=True)
+
+                return res
                 user.save()
                 access_token = access_token
                 return JsonResponse({'message': "회원가입 성공", "token": access_token, 'error': False, "user" :{"id": user.id, "user_id": user.user_id, "email": user.email, 'login_type': user.login_type}}, status=200)
