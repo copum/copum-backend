@@ -50,7 +50,7 @@ class kakao_login(APIView) :
                 access_token = str(token.access_token)
                 res = Response(
                     {
-                        "user": serializer.data,
+                        "user": user,
                         "message": "register successs",
                         "token": {
                             "access": access_token,
