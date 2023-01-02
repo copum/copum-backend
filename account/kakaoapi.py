@@ -29,12 +29,7 @@ class kakao_login(APIView) :
             
             # # 데이터 베이스에 이미 저장되어있는 회원이면, user에 회원 저장하기
             if User.objects.filter(email=email).exists() :
-                user = User.objects.get(
-                        email=email,
-                        user_id=nickname,
-                        profile_image = profile_image,
-                        login_type = 'kakao'
-                )
+                user = User.objects.get(email=email)
                 access_token = access_token
                 return JsonResponse({'message' : "로그인 성공", "token" : access_token, 'error' : False, "user" :{"id": user.id, "user_id": user.user_id, "email": user.email, 'login_type': user.login_type}}, status=200)
 
