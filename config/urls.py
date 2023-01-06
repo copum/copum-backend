@@ -7,7 +7,7 @@ from Post.views.list import *
 from Post.views.detail import *
 
 from rest_framework import routers
-from user.views import RegisterAPIView, UserViewSet, AuthAPIView
+from users.views import RegisterAPIView, UserViewSet, AuthAPIView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 router = routers.DefaultRouter()

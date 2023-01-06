@@ -1,5 +1,5 @@
 from django.urls import path
-from .kakaoapi import kakao_login
+from account.kakaoapi import kakao_login
 
 
 urlpatterns = [

@@ -5,7 +5,7 @@ import os
 load_dotenv(dotenv_path='./config/.env')
 env = os.environ
 
-con = pymysql.connect(host=env.get('DATABASE_HOST'), user=env.get('DATABASE_USER'), password=env.get('DATABASE_PASSWORD'), db=env.get('DATABASES'), charset='utf8')
+con = pymysql.connect(host=env.get('DATABASE_HOST'), user=env.get('DATABASE_USER'), password=env.get('DATABASE_PASSWORD'), database=env.get('DATABASE_NAME'), charset='utf8')
 
 cur = con.cursor()
 

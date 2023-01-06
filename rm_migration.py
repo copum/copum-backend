@@ -7,13 +7,16 @@ from dotenv import load_dotenv
 
 load_dotenv(dotenv_path='./config/.env')
 env = os.environ
-con = pymysql.connect(host=env.get('DATABASE_HOST'), user=env.get('DATABASE_USER'), password=env.get('DATABASE_PASSWORD'), charset='utf8')
+
+print(env.get("DATABASE_NAME"))
+
+con = pymysql.connect(host=env.get('DATABASE_HOST'), user=env.get('DATABASE_USER'), password=env.get('DATABASE_PASSWORD'), database=env.get('DATABASE_NAME'), charset='utf8')
 
 cursor = con.cursor()
-cursor.execute("drop database if exists {}".format(env.get("DATABASES")))
-print('Database dropped[ {} ]'.format(env.get("DATABASES")))
-cursor.execute("create database {}".format(env.get("DATABASES")))
-print('Database created [ {} ]'.format(env.get("DATABASES")))
+cursor.execute("drop database if exists {}".format(env.get("DATABASE_NAME")))
+print('Database dropped[ {} ]'.format(env.get("DATABASE_NAME")))
+cursor.execute("create database {}".format(env.get("DATABASE_NAME")))
+print('Database created [ {} ]'.format(env.get("DATABASE_NAME")))
 
 con.close()
 

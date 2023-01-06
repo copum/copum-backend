@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 # 헬퍼 클래스
 class UserManager(BaseUserManager):
-    def create_user(self, email, password, **kwargs):
+    def create_user(self, email,user_id,profile_image, **kwargs):
         """
         주어진 이메일, 비밀번호 등 개인정보로 User 인스턴스 생성
         """
@@ -12,42 +12,42 @@ class UserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
         user = self.model(
             email=email,
+            user_id=user_id,
+            profile_image=profile_image,
         )
-        user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email=None, password=None, **extra_fields):
-        """
-        주어진 이메일, 비밀번호 등 개인정보로 User 인스턴스 생성
-        단, 최상위 사용자이므로 권한을 부여
-        """
-        superuser = self.create_user(
-            email=email,
-            password=password,
-        )
+    # def create_superuser(self, email=None, password=None, **extra_fields):
+    #     """
+    #     주어진 이메일, 비밀번호 등 개인정보로 User 인스턴스 생성
+    #     단, 최상위 사용자이므로 권한을 부여
+    #     """
+    #     superuser = self.create_user(
+    #         email=email,
+    #         password=password,
+    #     )
 
-        superuser.is_staff = True
-        superuser.is_superuser = True
-        superuser.is_active = True
+    #     superuser.is_staff = True
+    #     superuser.is_superuser = True
+    #     superuser.is_active = True
 
-        superuser.save(using=self._db)
-        return superuser
+    #     superuser.save(using=self._db)
+    #     return superuser
 
 
 # AbstractBaseUser를 상속해서 유저 커스텀
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=30, unique=True, null=False, blank=False)
     user_id = models.CharField(max_length=100)
-    profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True, verbose_name='프로필 사진')
-    password = models.CharField(max_length=255, null=True)
+    profile_image = models.CharField(max_length=100, blank=True, null=True, verbose_name='프로필 사진')
+    # profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True, verbose_name='프로필 사진')
     login_type = models.CharField(default='', null=True, max_length=10)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     # 헬퍼 클래스 사용
     objects = UserManager()
 
@@ -56,6 +56,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'users'
+
 
 # class User(models.Model):
 #     user_id = models.CharField(max_length=100)
