@@ -39,7 +39,6 @@ class kakao_login(APIView) :
             }
             
             if User.objects.filter(email=email).exists():
-                # user = get_object_or_404(User, email= email)
                 user = User.objects.get(email = email)
             else :
                 serializer = UserSerializer(data=data)
