@@ -40,8 +40,11 @@ class kakao_login(APIView) :
             
             if User.objects.filter(email=email).exists():
                 user = User.objects.get(email = email)
+                print('1')
+                print(user.id)
             else :
                 serializer = UserSerializer(data=data)
+                print('2')
                 if serializer.is_valid():
                     user = serializer.save()
                 else:
@@ -53,14 +56,19 @@ class kakao_login(APIView) :
             access_token = str(token.access_token)
             res = JsonResponse(
                 {
-                    "user": json.dumps(user, default=str, indent=2),
+                    "user": {"email": user.email,
+                    "profile" : user.user_id,
+                    "profile_image": user.profile_image                    },
                     "message": "register successs",
+                    "error": False,
+                    "status":200,
                     "token": {
                         "access": access_token,
                         "refresh": refresh_token,
                     },
                 },
                 status=status.HTTP_200_OK,
+                
             )
             print(res)
             return res

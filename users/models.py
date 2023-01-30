@@ -39,7 +39,7 @@ class UserManager(BaseUserManager):
 # AbstractBaseUser를 상속해서 유저 커스텀
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=30, unique=True, null=False, blank=False)
-    user_id = models.CharField(max_length=100)
+    user_id = models.CharField(max_length=100, blank=True, null=True)
     profile_image = models.CharField(max_length=100, blank=True, null=True, verbose_name='프로필 사진')
     # profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True, verbose_name='프로필 사진')
     login_type = models.CharField(default='', null=True, max_length=10)
