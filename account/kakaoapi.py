@@ -58,7 +58,8 @@ class kakao_login(APIView) :
                 {
                     "user": {"email": user.email,
                     "profile" : user.user_id,
-                    "profile_image": user.profile_image                    },
+                    "profile_image": user.profile_image,
+                    "user_id" :user.id},
                     "message": "register successs",
                     "error": False,
                     "status":200,

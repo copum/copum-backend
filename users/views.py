@@ -9,7 +9,7 @@ from django.shortcuts import render, get_object_or_404
 from config.settings import SECRET_KEY
 
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 from .serializers import *
 
 
@@ -120,7 +120,7 @@ class AuthAPIView(APIView):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
